@@ -27,6 +27,8 @@ import {
   Shield,
   Clock,
   Sparkles,
+  Search,
+  Heart,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -41,12 +43,10 @@ type ConsultationData = {
   email: string
   company: string
   phone: string
-  isGuest: boolean
 }
 
 export default function ConsultationPage() {
   const [currentStep, setCurrentStep] = useState(0)
-  const [isGuest, setIsGuest] = useState(false)
   const [consultationData, setConsultationData] = useState<ConsultationData>({
     businessType: "",
     companySize: "",
@@ -58,7 +58,6 @@ export default function ConsultationPage() {
     email: "",
     company: "",
     phone: "",
-    isGuest: false,
   })
 
   // Update header dropdown when data changes
@@ -91,7 +90,16 @@ export default function ConsultationPage() {
     { id: "contact", title: "Contact", icon: Calendar, color: "pink" },
   ]
 
+  
   const businessTypes = [
+        {
+      id: "indvi",
+      label: "Individual",
+      description: "For daily use",
+      icon: "🙍‍♂️",
+      gradient: "from-yellow-500/20 to-lime-500/20",
+      border: "border-yellow-500/30",
+    },
     {
       id: "startup",
       label: "Startup",
@@ -116,17 +124,11 @@ export default function ConsultationPage() {
       gradient: "from-purple-500/20 to-indigo-500/20",
       border: "border-purple-500/30",
     },
-    {
-      id: "agency",
-      label: "Agency",
-      description: "Creative & marketing",
-      icon: "🎨",
-      gradient: "from-pink-500/20 to-rose-500/20",
-      border: "border-pink-500/30",
-    },
+
   ]
 
   const companySizes = [
+    { id: "1", label: "Individual", description: "Your an Individual", icon: "1️⃣" },
     { id: "1-10", label: "1-10 employees", description: "Small team", icon: "👥" },
     { id: "11-50", label: "11-50 employees", description: "Growing company", icon: "🏢" },
     { id: "51-200", label: "51-200 employees", description: "Mid-size", icon: "🏬" },
@@ -135,54 +137,55 @@ export default function ConsultationPage() {
 
   const projectTypes = [
     {
-      id: "website",
-      label: "Website Development",
-      icon: <Globe className="w-6 h-6" />,
+      id: "Productivity",
+      label: "Productivity Assistant",
+      icon: <CheckCircle className="w-6 h-6" />,
       color: "emerald",
-      description: "Web applications",
+      description: "Productivity Boost",
     },
     {
-      id: "mobile",
-      label: "Mobile App",
-      icon: <Smartphone className="w-6 h-6" />,
+      id: "Administrative",
+      label: "Administrative Assistant",
+      icon: <Users className="w-6 h-6" />,
       color: "blue",
-      description: "iOS & Android",
+      description: "Administral Control",
     },
     {
-      id: "digital",
-      label: "Digital Systems",
-      icon: <Laptop className="w-6 h-6" />,
+      id: "VA",
+      label: "My Virtual Assistant",
+      icon: <Search className="w-6 h-6" />,
       color: "purple",
-      description: "Enterprise software",
+      description: "Personal Assistant",
     },
     {
       id: "mechanical",
-      label: "Mechanical Engineering",
-      icon: <Cog className="w-6 h-6" />,
+      label: "Ai Health & Welllness Coach",
+      icon: <Heart className="w-6 h-6" />,
       color: "orange",
-      description: "Product design",
+      description: "Health & Wellness",
     },
     {
-      id: "product",
-      label: "Product Development",
-      icon: <Package className="w-6 h-6" />,
+      id: "Finance",
+      label: "Ai Finance Coach",
+      icon: <DollarSign className="w-6 h-6" />,
       color: "cyan",
-      description: "End-to-end solutions",
+      description: "Financial Guidance",
     },
     {
-      id: "architecture",
-      label: "Architecture Design",
+      id: "Startup",
+      label: "Startup Coach",
       icon: <Building2 className="w-6 h-6" />,
       color: "indigo",
-      description: "Structural design",
+      description: "Startup Related Help",
     },
   ]
 
   const budgetRanges = [
-    { id: "5k-25k", label: "$5K - $25K", description: "Small projects", icon: "💡" },
-    { id: "25k-100k", label: "$25K - $100K", description: "Medium solutions", icon: "🚀" },
-    { id: "100k-500k", label: "$100K - $500K", description: "Enterprise", icon: "🏢" },
-    { id: "500k+", label: "$500K+", description: "Transformation", icon: "⭐" },
+    { id: "1k-5k", label: "$1K - $5K", description: "Coustomizable Personal Assistants", icon: "1️⃣" },
+    { id: "5k-25k", label: "$5K - $25K", description: "MultiAgent systems", icon: "💡" },
+    { id: "25k-100k", label: "$25K - $100K", description: "Ai solutions", icon: "🚀" },
+    { id: "100k-500k", label: "$100K - $500K", description: "Ai Enterprise", icon: "🏢" },
+  
   ]
 
   const timelines = [
@@ -193,11 +196,11 @@ export default function ConsultationPage() {
   ]
 
   const businessGoals = [
-    { id: "increase-sales", label: "Increase Sales", icon: <TrendingUp className="w-5 h-5" />, color: "emerald" },
-    { id: "improve-efficiency", label: "Improve Efficiency", icon: <Rocket className="w-5 h-5" />, color: "blue" },
-    { id: "expand-market", label: "Expand Market", icon: <Target className="w-5 h-5" />, color: "purple" },
+    { id: "increase-sales", label: "Boost Productivity", icon: <TrendingUp className="w-5 h-5" />, color: "emerald" },
+    { id: "improve-productivity", label: "Improve Efficiency", icon: <Rocket className="w-5 h-5" />, color: "blue" },
+    { id: "expand-market", label: "Automate Tasks", icon: <Target className="w-5 h-5" />, color: "purple" },
     { id: "reduce-costs", label: "Reduce Costs", icon: <BarChart className="w-5 h-5" />, color: "green" },
-    { id: "modernize", label: "Modernize Ops", icon: <Sparkles className="w-5 h-5" />, color: "orange" },
+    { id: "modernize", label: "Revolutionalise with AI", icon: <Sparkles className="w-5 h-5" />, color: "orange" },
     { id: "competitive-advantage", label: "Competitive Edge", icon: <Shield className="w-5 h-5" />, color: "cyan" },
   ]
 
@@ -214,6 +217,14 @@ export default function ConsultationPage() {
   }
 
   const handleSubmit = () => {
+    // Validate required fields
+    if (!consultationData.name || !consultationData.email || !consultationData.businessType || 
+        !consultationData.companySize || !consultationData.budget || !consultationData.timeline ||
+        consultationData.projectType.length === 0 || consultationData.goals.length === 0) {
+      alert("Please fill in all required fields before submitting.")
+      return
+    }
+
     localStorage.setItem("consultationCompleted", "true")
     localStorage.setItem("consultationData", JSON.stringify(consultationData))
     window.location.href = "/dashboard"
@@ -552,98 +563,72 @@ export default function ConsultationPage() {
                     <div className="text-center space-y-2">
                       <h2 className="text-2xl font-bold flex items-center justify-center">
                         <Calendar className="w-6 h-6 mr-3 text-emerald-400" />
-                        Let's get your consultation scheduled
+                        Complete Your Information
                       </h2>
-                      <p className="text-gray-400">Final step to unlock your strategy</p>
+                      <p className="text-gray-400">All fields are required to proceed</p>
                     </div>
 
-                    {/* Guest Mode Toggle */}
-                    <div className="max-w-xl mx-auto mb-6">
-                      <div className="p-4 bg-gradient-to-r from-emerald-500/10 to-blue-500/10 rounded-xl border border-emerald-500/20">
-                        <div className="flex items-center justify-between">
-                          <div>
-                            <h3 className="font-bold text-white">Try as Guest</h3>
-                            <p className="text-gray-400 text-sm">Preview dashboard without saving info</p>
-                          </div>
-                          <button
-                            onClick={() => setIsGuest(!isGuest)}
-                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                              isGuest ? "bg-emerald-500" : "bg-gray-600"
-                            }`}
-                          >
-                            <span
-                              className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                                isGuest ? "translate-x-6" : "translate-x-1"
-                              }`}
-                            />
-                          </button>
+                    <div className="max-w-2xl mx-auto">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <label className="block text-sm font-medium text-gray-300">Full Name *</label>
+                          <input
+                            type="text"
+                            value={consultationData.name}
+                            onChange={(e) => setConsultationData({ ...consultationData, name: e.target.value })}
+                            className="w-full px-4 py-3 bg-gray-800/50 border border-gray-600 rounded-lg text-white focus:border-emerald-500 focus:outline-none transition-all"
+                            placeholder="Your full name"
+                            required
+                          />
                         </div>
+
+                        <div className="space-y-2">
+                          <label className="block text-sm font-medium text-gray-300">Email Address *</label>
+                          <input
+                            type="email"
+                            value={consultationData.email}
+                            onChange={(e) => setConsultationData({ ...consultationData, email: e.target.value })}
+                            className="w-full px-4 py-3 bg-gray-800/50 border border-gray-600 rounded-lg text-white focus:border-emerald-500 focus:outline-none transition-all"
+                            placeholder="your@email.com"
+                            required
+                          />
+                        </div>
+
+                        <div className="space-y-2">
+                          <label className="block text-sm font-medium text-gray-300">Company Name *</label>
+                          <input
+                            type="text"
+                            value={consultationData.company}
+                            onChange={(e) => setConsultationData({ ...consultationData, company: e.target.value })}
+                            className="w-full px-4 py-3 bg-gray-800/50 border border-gray-600 rounded-lg text-white focus:border-emerald-500 focus:outline-none transition-all"
+                            placeholder="Your company"
+                            required
+                          />
+                        </div>
+
+                        <div className="space-y-2">
+                          <label className="block text-sm font-medium text-gray-300">Phone Number *</label>
+                          <input
+                            type="tel"
+                            value={consultationData.phone}
+                            onChange={(e) => setConsultationData({ ...consultationData, phone: e.target.value })}
+                            className="w-full px-4 py-3 bg-gray-800/50 border border-gray-600 rounded-lg text-white focus:border-emerald-500 focus:outline-none transition-all"
+                            placeholder="+1 (555) 123-4567"
+                            required
+                          />
+                        </div>
+                      </div>
+                      
+                      <div className="mt-6 p-4 bg-yellow-500/10 border border-yellow-500/20 rounded-xl">
+                        <div className="flex items-center space-x-2 text-yellow-400 mb-2">
+                          <CheckCircle className="w-5 h-5" />
+                          <span className="font-medium">Required Information</span>
+                        </div>
+                        <p className="text-gray-300 text-sm">
+                          All fields are required to ensure we can provide you with the most accurate consultation and follow-up.
+                        </p>
                       </div>
                     </div>
-
-                    {!isGuest && (
-                      <div className="max-w-2xl mx-auto">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          <div className="space-y-2">
-                            <label className="block text-sm font-medium text-gray-300">Full Name *</label>
-                            <input
-                              type="text"
-                              value={consultationData.name}
-                              onChange={(e) => setConsultationData({ ...consultationData, name: e.target.value })}
-                              className="w-full px-4 py-3 bg-gray-800/50 border border-gray-600 rounded-lg text-white focus:border-emerald-500 focus:outline-none transition-all"
-                              placeholder="Your full name"
-                            />
-                          </div>
-
-                          <div className="space-y-2">
-                            <label className="block text-sm font-medium text-gray-300">Email Address *</label>
-                            <input
-                              type="email"
-                              value={consultationData.email}
-                              onChange={(e) => setConsultationData({ ...consultationData, email: e.target.value })}
-                              className="w-full px-4 py-3 bg-gray-800/50 border border-gray-600 rounded-lg text-white focus:border-emerald-500 focus:outline-none transition-all"
-                              placeholder="your@email.com"
-                            />
-                          </div>
-
-                          <div className="space-y-2">
-                            <label className="block text-sm font-medium text-gray-300">Company Name</label>
-                            <input
-                              type="text"
-                              value={consultationData.company}
-                              onChange={(e) => setConsultationData({ ...consultationData, company: e.target.value })}
-                              className="w-full px-4 py-3 bg-gray-800/50 border border-gray-600 rounded-lg text-white focus:border-emerald-500 focus:outline-none transition-all"
-                              placeholder="Your company"
-                            />
-                          </div>
-
-                          <div className="space-y-2">
-                            <label className="block text-sm font-medium text-gray-300">Phone Number</label>
-                            <input
-                              type="tel"
-                              value={consultationData.phone}
-                              onChange={(e) => setConsultationData({ ...consultationData, phone: e.target.value })}
-                              className="w-full px-4 py-3 bg-gray-800/50 border border-gray-600 rounded-lg text-white focus:border-emerald-500 focus:outline-none transition-all"
-                              placeholder="+1 (555) 123-4567"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    )}
-
-                    {isGuest && (
-                      <div className="max-w-xl mx-auto">
-                        <div className="text-center p-6 bg-gradient-to-r from-emerald-500/10 to-blue-500/10 rounded-xl border border-emerald-500/20">
-                          <div className="w-12 h-12 bg-emerald-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                            <Sparkles className="w-6 h-6 text-emerald-400" />
-                          </div>
-                          <h3 className="font-bold text-emerald-400 mb-2">Guest Mode Active</h3>
-                          <p className="text-gray-400">
-                            Explore our dashboard and see what we offer. Sign up at the end to save your consultation.
-                          </p>
-                        </div>
-                      </div>
-                    )}
                   </div>
                 )}
               </motion.div>
@@ -673,9 +658,10 @@ export default function ConsultationPage() {
             ) : (
               <Button
                 onClick={handleSubmit}
+                disabled={currentStep === steps.length - 1 && (!consultationData.name || !consultationData.email || !consultationData.company || !consultationData.phone)}
                 className="bg-gradient-to-r from-emerald-500 to-green-500 hover:from-emerald-600 hover:to-green-600 text-white"
               >
-                {isGuest ? "Preview Dashboard" : "Start Consultation"}
+                Submit Consultation Request
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             )}
