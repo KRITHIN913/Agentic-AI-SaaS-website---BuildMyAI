@@ -229,8 +229,7 @@ export function ExpertiseSection(): ReactElement {
                       })
                     }}
                   >
-                    <source src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_4757%20%281%29.mp4-zuZGmYHOoQtajH4tuZKUVOr3qtbneV.mov" type="video/mp4" />
-                    <source src="/videos/glasspatch-demo.webm" type="video/webm" />
+               <source src="/videos/GTA.mp4" type="video/mp4" />
                   </video>
                   <div className="absolute inset-0 bg-black/50"></div>
                 </div>
@@ -238,13 +237,13 @@ export function ExpertiseSection(): ReactElement {
                 <div className="relative z-10 p-6 h-full flex flex-col justify-between">
                   <div>
                     <Badge variant="outline" className="bg-background/20 text-white border-white/20 mb-4">
-                      GLASSPATCH
+                      AI TASK Automation
                     </Badge>
                   </div>
 
                   <div className="space-y-2">
                     <h3 className="text-xl font-bold text-white">
-                      $2M raised: the strategy behind Glass Patch's growth
+                      The Future of AI 
                     </h3>
                     <button className="text-primary flex items-center text-sm group-hover:underline">
                       <ChevronRight className="w-4 h-4 mr-1" />
@@ -300,7 +299,7 @@ export function ExpertiseSection(): ReactElement {
                     <div>
                       <p className="text-sm text-muted-foreground">Fact 02</p>
                       <ViewportTriggeredCountUp />
-                      <p className="text-muted-foreground">Raised by the brands we've partnered with</p>
+                      <p className="text-muted-foreground">Market Value estimated of our Ai Solutions  </p>
                     </div>
                     <div className="flex items-center space-x-2 px-3 py-2 bg-background/50 backdrop-blur-sm border border-border/30 rounded-full self-start lg:self-center">
                       <span className="text-xs text-muted-foreground">powered by</span>

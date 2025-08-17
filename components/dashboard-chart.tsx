@@ -12,13 +12,13 @@ export function DashboardChart() {
   // Success metrics that rotate
   const metrics = [
     {
-      title: "Revenue Generated",
+      title: "Revenue Expected to be Generated",
       value: "$8.4M",
       change: "+340%",
       icon: <DollarSign className="w-6 h-6" />,
       color: "#10b981",
       description: "Total revenue generated for our clients",
-      details: "Across 47 successful projects",
+      details: "Across all successful projects",
     },
     {
       title: "Client Growth",
@@ -81,13 +81,13 @@ export function DashboardChart() {
       {/* Header */}
       <div className="relative z-10 mb-6">
         <div className="flex items-center justify-between mb-2">
-          <h3 className="text-lg font-semibold text-white">Client Impact Metrics</h3>
+          <h3 className="text-lg font-semibold text-white">Future Client Metrics & Targets </h3>
           <div className="flex items-center space-x-1 bg-green-500/20 text-green-400 px-2 py-1 rounded-full text-xs">
             <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
             <span>Live Data</span>
           </div>
         </div>
-        <p className="text-gray-400 text-sm">Real results from our client partnerships</p>
+        <p className="text-gray-400 text-sm">Estimations provided after tremendous research</p>
       </div>
 
       {/* Main Metric Display */}
