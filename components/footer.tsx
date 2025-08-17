@@ -100,7 +100,7 @@ export function Footer() {
           <div className="text-center space-y-4">
             <img src="/images/weltivation-logo.png" alt="Weltivation" className="h-12 mx-auto" />
             <div className="text-muted-foreground text-xs">
-              &copy; {new Date().getFullYear()} Weltivation. All rights reserved.
+              &copy; {new Date().getFullYear()} BuilMyAi. All rights reserved.
             </div>
           </div>
 
