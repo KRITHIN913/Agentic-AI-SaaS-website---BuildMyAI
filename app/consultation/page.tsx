@@ -1,5 +1,6 @@
 "use client"
 
+import { submitConsultation } from '@/app/actions';
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { NavBar } from "@/components/nav-bar"
@@ -31,6 +32,12 @@ import {
   Heart,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { supabase } from '@/lib/supabase'; // Your client from step 1
+import { useRouter } from 'next/navigation';
+
+
+
+
 
 type ConsultationData = {
   businessType: string
@@ -43,6 +50,7 @@ type ConsultationData = {
   email: string
   company: string
   phone: string
+  password: string // Optional for consultation, required for login
 }
 
 export default function ConsultationPage() {
@@ -58,6 +66,7 @@ export default function ConsultationPage() {
     email: "",
     company: "",
     phone: "",
+    password: "",
   })
 
   // Update header dropdown when data changes
@@ -131,8 +140,8 @@ export default function ConsultationPage() {
     { id: "1", label: "Individual", description: "Your an Individual", icon: "1️⃣" },
     { id: "1-10", label: "1-10 employees", description: "Small team", icon: "👥" },
     { id: "11-50", label: "11-50 employees", description: "Growing company", icon: "🏢" },
-    { id: "51-200", label: "51-200 employees", description: "Mid-size", icon: "🏬" },
-    { id: "200+", label: "200+ employees", description: "Large corp", icon: "🏭" },
+    { id: "51-200+", label: "51-200+employees", description: "Mid-size", icon: "🏬" },
+  
   ]
 
   const projectTypes = [
@@ -216,19 +225,22 @@ export default function ConsultationPage() {
     }
   }
 
-  const handleSubmit = () => {
-    // Validate required fields
-    if (!consultationData.name || !consultationData.email || !consultationData.businessType || 
-        !consultationData.companySize || !consultationData.budget || !consultationData.timeline ||
-        consultationData.projectType.length === 0 || consultationData.goals.length === 0) {
-      alert("Please fill in all required fields before submitting.")
-      return
-    }
+  const [isLoading, setIsLoading] = useState(false);
+  
+  
+  const handleSubmit = async () => {
+    // 1. Set loading to true to give user feedback
+    setIsLoading(true);
 
-    localStorage.setItem("consultationCompleted", "true")
-    localStorage.setItem("consultationData", JSON.stringify(consultationData))
-    window.location.href = "/dashboard"
-  }
+  
+      // 2. Call the server action and wait for it to complete
+      const result = await submitConsultation(consultationData);
+
+
+
+
+
+  };
 
   const toggleProjectType = (typeId: string) => {
     setConsultationData((prev) => ({
@@ -581,6 +593,19 @@ export default function ConsultationPage() {
                             required
                           />
                         </div>
+                        
+                        <div className="space-y-2">
+                        <label className="block text-sm font-medium text-gray-300">Phone Number *</label>
+                        <input
+                          type="tel"
+                          value={consultationData.phone}
+                          onChange={(e) => setConsultationData({ ...consultationData, phone: e.target.value })}
+                          className="w-full px-4 py-3 bg-gray-800/50 border border-gray-600 rounded-lg text-white focus:border-emerald-500 focus:outline-none transition-all"
+                          placeholder="+1 (555) 123-4567"
+                          required
+                          />
+                        </div>
+                      </div>
 
                         <div className="space-y-2">
                           <label className="block text-sm font-medium text-gray-300">Email Address *</label>
@@ -590,6 +615,18 @@ export default function ConsultationPage() {
                             onChange={(e) => setConsultationData({ ...consultationData, email: e.target.value })}
                             className="w-full px-4 py-3 bg-gray-800/50 border border-gray-600 rounded-lg text-white focus:border-emerald-500 focus:outline-none transition-all"
                             placeholder="your@email.com"
+                            required
+                          />
+                        </div>
+
+                        <div className="space-y-2">
+                        <label className="block text-sm font-medium text-gray-300">Password *</label>
+                        <input
+                            type="password"
+                            value={consultationData.password}
+                            onChange={(e) => setConsultationData({ ...consultationData, password: e.target.value })}
+                            className="w-full px-4 py-3 bg-gray-800/50 border border-gray-600 rounded-lg text-white focus:border-emerald-500 focus:outline-none transition-all"
+                            placeholder="password"
                             required
                           />
                         </div>
@@ -606,18 +643,7 @@ export default function ConsultationPage() {
                           />
                         </div>
 
-                        <div className="space-y-2">
-                          <label className="block text-sm font-medium text-gray-300">Phone Number *</label>
-                          <input
-                            type="tel"
-                            value={consultationData.phone}
-                            onChange={(e) => setConsultationData({ ...consultationData, phone: e.target.value })}
-                            className="w-full px-4 py-3 bg-gray-800/50 border border-gray-600 rounded-lg text-white focus:border-emerald-500 focus:outline-none transition-all"
-                            placeholder="+1 (555) 123-4567"
-                            required
-                          />
-                        </div>
-                      </div>
+
                       
                       <div className="mt-6 p-4 bg-yellow-500/10 border border-yellow-500/20 rounded-xl">
                         <div className="flex items-center space-x-2 text-yellow-400 mb-2">
@@ -656,14 +682,20 @@ export default function ConsultationPage() {
                 <ChevronRight className="w-4 h-4 ml-2" />
               </Button>
             ) : (
+              
+              // Find this button in your JSX
               <Button
-                onClick={handleSubmit}
-                disabled={currentStep === steps.length - 1 && (!consultationData.name || !consultationData.email || !consultationData.company || !consultationData.phone)}
-                className="bg-gradient-to-r from-emerald-500 to-green-500 hover:from-emerald-600 hover:to-green-600 text-white"
+              onClick={handleSubmit}
+              // Disable the button while loading or if required fields are empty
+              disabled={isLoading || (currentStep === steps.length - 1 && (!consultationData.name || !consultationData.email))}
+              className="bg-gradient-to-r from-emerald-500 to-green-500 hover:from-emerald-600 hover:to-green-600 text-white"
               >
-                Submit Consultation Request
-                <ArrowRight className="w-4 h-4 ml-2" />
+              {/* Change the button text based on the loading state */}
+              {isLoading ? 'Submitting...' : 'Submit Consultation Request'}
+              <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
+
+
             )}
           </div>
         </div>
