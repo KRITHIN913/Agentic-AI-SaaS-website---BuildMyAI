@@ -62,7 +62,7 @@ export function DashboardClient({ consultationData }: { consultationData: Projec
   const supportOptions = [
     { icon: <MessageSquare className="w-5 h-5" />, title: "Live Chat", description: "Get instant answers", action: "Start Chat", href: "/support" },
     { icon: <Headphones className="w-5 h-5" />, title: "Phone Support", description: "Speak directly with our team", action: "Call Now", href: "+918374315934" },
-    { icon: <Mail className="w-5 h-5" />, title: "Email Support", description: "Send us your questions", action: "Send Email", href: "buildmyai.tech@gmail.com" },
+    { icon: <Mail className="w-5 h-5" />, title: "Email Support", description: "Send us your questions", action: "Send Email", href: "buildmyai.tech@gmailx.com" },
   ];
 
   return (
